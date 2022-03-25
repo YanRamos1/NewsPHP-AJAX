@@ -15,8 +15,6 @@ if (isset($_GET['search'])) {
         echo "<p>" . $p['created_at'] . "</p>";
         echo "</div>";
     }
-
-
 } else {
     $noticias = noticias::getAll();
     foreach ($noticias as $noticia) {

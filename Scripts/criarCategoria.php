@@ -1,12 +1,17 @@
 <?php
-require_once '../Models/Categorias.php';
+require_once '../Config/Database.php';
 
 
 try {
-    $categorias = new Categorias();
     $nome = $_POST['categoria'];
-    $categorias->add($nome);
+    $db = new Database();
+    $db = $db->connect();
+    $sql = "INSERT INTO categorias (nome) VALUES (:nome)";
+    $stmt = $db->prepare($sql);
+    $stmt->bindParam(':nome', $nome);
     sleep(2);
+    $stmt->execute();
+
     echo "Categoria cadastrada com sucesso!";
 } catch (Exception $e) {
     echo $e->getMessage();
